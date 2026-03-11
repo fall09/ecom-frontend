@@ -1,0 +1,110 @@
+.detail-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0e7ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-card {
+  width: 100%;
+  max-width: 1100px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.detail-image-wrapper {
+  background: #f8fafc;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-info {
+  padding: 40px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.detail-info h1 {
+  font-size: 34px;
+  color: #111827;
+  margin: 18px 0 12px;
+}
+
+.detail-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+
+.detail-stock {
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.detail-description {
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+.quantity-box {
+  margin-bottom: 20px;
+}
+
+.quantity-box label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.quantity-box input {
+  width: 120px;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+}
+
+.add-cart-button {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.detail-loading,
+.detail-error {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 18px;
+}
+
+@media (max-width: 900px) {
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+}

@@ -22,7 +22,7 @@ The backend of this project is built with **Spring Boot**.
 You can access the backend repository from the following link:
 
 👉 Backend Repository:  
-https://github.com/your-backend-repo-link
+https://github.com/fall09/ecommerce-webapp
 
 Make sure the backend server is running on:
 

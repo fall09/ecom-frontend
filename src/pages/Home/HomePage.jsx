@@ -42,6 +42,7 @@ const HomePage = () => {
     );
   }, [products, selectedCategory]);
 
+  
   const getCategoryCount = (categoryName) => {
     return products.filter(
       (product) =>

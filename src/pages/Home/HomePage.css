@@ -4,16 +4,20 @@
   background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0e7ff);
 }
 
-.home-header {
+.home-container {
   max-width: 1200px;
-  margin: 0 auto 28px auto;
+  margin: 0 auto;
+}
+
+.home-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 }
 
-.home-header h1 {
-  font-size: 34px;
+.home-title {
+  font-size: 36px;
   color: #111827;
 }
 
@@ -26,18 +30,104 @@
   font-weight: 600;
 }
 
+.category-filter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.category-filter button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: white;
+  color: #111827;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  transition: 0.2s ease;
+}
+
+.category-filter button:hover {
+  transform: translateY(-2px);
+}
+
+.category-filter .active-category {
+  background: #111827;
+  color: white;
+}
+
 .products-grid {
-  max-width: 1200px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 24px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.product-image-wrapper {
+  width: 100%;
+  height: 220px;
+  background: #f8fafc;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info {
+  margin-top: 14px;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4f46e5;
+  margin-bottom: 6px;
+}
+
+.product-stock {
+  font-size: 14px;
+  color: #475569;
 }
 
 .error-text {
-  text-align: center;
   color: #dc2626;
   margin-bottom: 16px;
+}
+
+.no-products-text {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
 @media (max-width: 900px) {
@@ -58,5 +148,6 @@
   .home-header {
     flex-direction: column;
     gap: 14px;
+    align-items: flex-start;
   }
 }

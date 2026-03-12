@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllProducts } from "../../services/productService";
 import { getAllCategories } from "../../services/categoryService";
-import ProductCard from "./../ProductCard/ProductCard";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -21,7 +20,7 @@ const HomePage = () => {
         setCategories(categoryData);
       } catch (error) {
         console.error(error);
-        setErrorMessage("Data could not be loaded");
+        setErrorMessage("Products could not be loaded");
       }
     };
 
@@ -43,44 +42,65 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <header className="home-header">
-        <h1>Products</h1>
-        <Link to="/cart" className="cart-link">
-          Go to Cart
-        </Link>
-      </header>
+      <div className="home-container">
+        <header className="home-header">
+          <h1 className="home-title">Products</h1>
+          <Link to="/cart" className="cart-link">
+            Go to Cart
+          </Link>
+        </header>
 
-      {errorMessage && <p className="error-text">{errorMessage}</p>}
+        {errorMessage && <p className="error-text">{errorMessage}</p>}
 
-      <div className="category-filter">
-        <button
-          className={selectedCategory === "ALL" ? "active-category" : ""}
-          onClick={() => setSelectedCategory("ALL")}
-        >
-          All
-        </button>
-
-        {categories.map((category) => (
+        <div className="category-filter">
           <button
-            key={category.id}
-            className={
-              selectedCategory === category.name ? "active-category" : ""
-            }
-            onClick={() => setSelectedCategory(category.name)}
+            className={selectedCategory === "ALL" ? "active-category" : ""}
+            onClick={() => setSelectedCategory("ALL")}
           >
-            {category.name}
+            All
           </button>
-        ))}
-      </div>
 
-      <div className="products-grid">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="no-products-text">No products found in this category</p>
-        )}
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              className={
+                selectedCategory === category.name ? "active-category" : ""
+              }
+              onClick={() => setSelectedCategory(category.name)}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+
+        <div className="products-grid">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <div className="product-card" key={product.id}>
+                <div className="product-image-wrapper">
+                  <img
+                    src={
+                      product.imgUrl && product.imgUrl.trim()
+                        ? product.imgUrl
+                        : "/shopping.png"
+                    }
+                    alt={product.name}
+                    className="product-image"
+                  />
+                </div>
+
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p className="product-description">{product.description}</p>
+                  <p className="product-price">${product.price}</p>
+                  <p className="product-stock">Stock: {product.stock}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="no-products-text">No products found in this category</p>
+          )}
+        </div>
       </div>
     </div>
   );

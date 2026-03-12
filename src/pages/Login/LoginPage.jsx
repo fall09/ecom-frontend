@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
+import shoppingImg from "../../assets/shopping.png";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -32,11 +33,14 @@ const LoginPage = () => {
     }
 
     try {
-      const isSuccess = await login(formData.email, formData.password);
+      const result = await login(formData.email, formData.password);
 
-      if (isSuccess === true) {
+      if (result && result.token) {
+        localStorage.setItem("token", result.token);
+
         alert("Login başarılı");
-        navigate("/register");
+
+        navigate("/home");
       } else {
         setErrorMessage("Email veya şifre yanlış");
       }
@@ -49,7 +53,7 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-card">
-        <img src="src/assets/shopping.png" alt="Shopping" className="login-icon" />
+        <img src={shoppingImg} alt="Shopping" className="login-icon" />
 
         <h1 className="login-title">Welcome Back</h1>
         <p className="login-subtitle">Please sign in to continue</p>
@@ -84,7 +88,7 @@ const LoginPage = () => {
           </button>
 
           <p className="login-footer">
-            Don&apos;t have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </p>
         </form>
       </div>

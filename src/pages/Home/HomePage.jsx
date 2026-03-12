@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../services/productService";
 import { getAllCategories } from "../../services/categoryService";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
@@ -40,6 +42,15 @@ const HomePage = () => {
     );
   }, [products, selectedCategory]);
 
+  const getCategoryCount = (categoryName) => {
+    return products.filter(
+      (product) =>
+        product.category &&
+        product.category.name &&
+        product.category.name.toLowerCase() === categoryName.toLowerCase()
+    ).length;
+  };
+
   return (
     <div className="home-page">
       <div className="home-container">
@@ -52,31 +63,42 @@ const HomePage = () => {
 
         {errorMessage && <p className="error-text">{errorMessage}</p>}
 
-        <div className="category-filter">
-          <button
-            className={selectedCategory === "ALL" ? "active-category" : ""}
-            onClick={() => setSelectedCategory("ALL")}
-          >
-            All
-          </button>
+        <div className="filter-bar">
+          <div className="filter-left">
+            <label htmlFor="categorySelect" className="filter-label">
+              Category
+            </label>
 
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className={
-                selectedCategory === category.name ? "active-category" : ""
-              }
-              onClick={() => setSelectedCategory(category.name)}
+            <select
+              id="categorySelect"
+              className="category-select"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
             >
-              {category.name}
-            </button>
-          ))}
+              <option value="ALL">All Categories</option>
+
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name} ({getCategoryCount(category.name)})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="filter-count-box">
+            <span className="filter-count-label">Product Count</span>
+            <span className="filter-count-value">{filteredProducts.length}</span>
+          </div>
         </div>
 
         <div className="products-grid">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div className="product-card" key={product.id}>
+              <div
+                className="product-card clickable-card"
+                key={product.id}
+                onClick={() => navigate(`/product/${product.id}`)}
+              >
                 <div className="product-image-wrapper">
                   <img
                     src={
@@ -94,6 +116,10 @@ const HomePage = () => {
                   <p className="product-description">{product.description}</p>
                   <p className="product-price">${product.price}</p>
                   <p className="product-stock">Stock: {product.stock}</p>
+
+                  <div className="product-card-footer">
+                    <span className="view-details-text">View Details</span>
+                  </div>
                 </div>
               </div>
             ))

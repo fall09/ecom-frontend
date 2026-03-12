@@ -102,6 +102,37 @@
   margin-top: 80px;
   font-size: 18px;
 }
+.product-detail-page {
+  position: relative;
+}
+
+.detail-card {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #111827;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.close-button:hover {
+  background: #4f46e5;
+  transform: scale(1.1);
+}
 
 @media (max-width: 900px) {
   .detail-card {

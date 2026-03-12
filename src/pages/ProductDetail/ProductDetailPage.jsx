@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { getProductById } from "../../services/productService";
 import { addToCart } from "../../services/cartService";
 import "./ProductDetailPage.css";
@@ -7,6 +7,7 @@ import "./ProductDetailPage.css";
 const ProductDetailPage = () => {
   const { id } = useParams();
   const cartId = 4;
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -47,9 +48,20 @@ const ProductDetailPage = () => {
   return (
     <div className="detail-page">
       <div className="detail-card">
+        <button
+          className="close-button"
+          onClick={() => navigate("/home")}
+        >
+          ✕
+        </button>
+
         <div className="detail-image-wrapper">
           <img
-            src={product.imgUrl && product.imgUrl.trim() ? product.imgUrl : "/shopping.png"}
+            src={
+              product.imgUrl && product.imgUrl.trim()
+                ? product.imgUrl
+                : "/shopping.png"
+            }
             alt={product.name}
             className="detail-image"
           />
